@@ -1,26 +1,46 @@
-// ==========================================================================
-//
-// blink a led on PIOB pin 27 == arduino-due on-board LED
-//
-// This file is in the public domain.
-//
-// ==========================================================================
-
 #include "hwlib.hpp"
+#include "fft.hpp"
+#include <complex>
+#include <iostream>
+#include <cstdlib>
+#include <unistd.h>
 
-int main( void ){	
-   // hwlib will kill the watchdog
-   
-   // the on-board LED is connected to port B bit 27   
-   auto led = hwlib::target::pin_in_out( hwlib::target::pins::d13 );
-   led.direction_set_output();
-   led.direction_flush();
-   while(1){
-      led.write( 1 );
-      led.flush();
-      hwlib::wait_ms( 200 );
-      led.write( 0 );
-      led.flush();
-      hwlib::wait_ms( 200 );   
-   }
+// remaps given value between low1 and high1 to a value between low2 and high2
+float remap(float value, float low1, float high1, float low2, float high2) {
+	if ((high1 - low1) != 0) {
+		return low2 + (high2 - low2) * ((value - low1) / (high1 - low1));
+	}
+	else {
+		std::cout << "Error, remap values invalid\n";
+		return 0;
+	}
+}
+
+int main(void){
+	srand((unsigned)time(0));
+	hwlib::target::window w(hwlib::xy(128,64), 1);
+
+	for(;;) {
+		w.clear();
+		Complex test[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+						  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+		CArray data(test, 128);
+
+		fft(data);
+
+		for (int i = 0; i < 128; i++) {
+			hwlib::line l(hwlib::xy(i,0), hwlib::xy(i, (int)remap(data[i].real(), -6000.0, 6000.0, 0.0, 128.0)));
+			l.draw(w);
+			usleep(500);
+		}
+		w.flush();
+	}
+	return 0;
 }

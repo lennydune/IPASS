@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES :=
+SOURCES := fft.cpp
 
 # header files in this project
-HEADERS :=
+HEADERS := fft.hpp
 
 # other places to look for files for this project
 SEARCH  := 
@@ -20,4 +20,4 @@ SEARCH  :=
 # set RELATIVE to the next higher directory 
 # and defer to the appropriate Makefile.* there
 RELATIVE := .
-include $(RELATIVE)/Makefile.due
+include $(RELATIVE)/Makefile.native
