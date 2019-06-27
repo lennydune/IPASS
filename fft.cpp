@@ -16,10 +16,3 @@ void fft(CArray &arr) {
 		arr[i+N/2] = even[i] - t;
 	}
 }
-
-void ifft(CArray &arr) {
-	arr = arr.apply(std::conj);
-	fft(arr);
-	arr = arr.apply(std::conj);
-	arr /= arr.size();
-}

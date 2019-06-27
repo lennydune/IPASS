@@ -7,4 +7,3 @@ typedef std::complex<double> Complex;
 typedef std::valarray<Complex> CArray;
 
 void fft(CArray &a);
-void ifft(CArray &b);
