@@ -52,10 +52,11 @@ int main(void) {
 		// iterate over every pixel that has to be written to (turned white/on)
 		for (int x = 0; x < display.size.x; x++) {
 			// also remap the data to usable values
-			for (int y = 0; y < (int)remap(data[x].real, 0, 4096, 0, display.size.y); y++) {
+			for (int y = 0; y < (int)remap(data[x].real(), 0, 4096, 0, display.size.y); y++) {
 				display.write(hwlib::xy(x,display.size.y - y));
 			}
 		}
+		hwlib::wait_ms(100);
 
 		// flush the display and do it all again
 		display.flush();

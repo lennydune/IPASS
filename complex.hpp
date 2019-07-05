@@ -1,4 +1,5 @@
 #include <cmath>
+#include <array>
 
 /// \brief class complex
 ///		   The class to implement complex numbers
@@ -24,7 +25,7 @@ public:
 
 	/// \brief complex operator+=
 	///		   Add a complex number into another complex number
-	complex& operator+=(const complex &rhs){
+	complex& operator+=(const complex &rhs) {
 		real += rhs.real;
 		imag += rhs.imag;
 		return *this;
@@ -32,7 +33,7 @@ public:
 
 	/// \brief complex operator-=
 	///		   Subtract a complex number into another complex number
-	complex& operator-=(const complex &rhs){
+	complex& operator-=(const complex &rhs) {
 		real -= rhs.real;
 		imag -= rhs.imag;
 		return *this;
@@ -40,10 +41,34 @@ public:
 
 	/// \brief complex operator*=
 	///		   Multiply a complex number into another complex number
-	complex& operator*=(const complex &rhs){
+	complex& operator*=(const complex &rhs) {
 		real *= rhs.real;
 		imag *= rhs.imag;
 		return *this;
+	}
+
+	/// \brief complex operator+
+	///		   Add a complex number with another complex number
+	complex operator+(const complex &rhs) {
+		complex x = *this;
+		x += rhs;
+		return x;
+	}
+
+	/// \brief complex operator-
+	///		   Subtract a complex number with another complex number
+	complex operator-(const complex &rhs) {
+		complex x = *this;
+		x -= rhs;
+		return x;
+	}
+
+	/// \brief complex operator*
+	///		   Multiply a complex number with another complex number
+	complex operator*(const complex &rhs) {
+		complex x = *this;
+		x *= rhs;
+		return x;
 	}
 };
 
@@ -53,14 +78,44 @@ public:
 	These can be used with [remap](@ref remap)*/
 complex polar(const double &rho, const double &theta);
 
-/// \brief complex operator+
-///		   Add a complex number with another complex number
-complex operator+(const complex &lhs, const complex &r);
-
-/// \brief complex operator-
-///		   Subtract a complex number with another complex number
-complex operator-(const complex &lhs, const complex &r);
-
-/// \brief complex operator*
-///		   Multiply a complex number with another complex number
-complex operator*(const complex &lhs, const complex &r);
+class complexArray {
+private:
+	complex arr[8][128] = {
+	// 2^0
+		{-1},
+	// 2^1
+		{-1,-1},
+	// 2^2
+		{-1,-1,-1,-1},
+	// 2^3
+		{-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^4
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^5
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^6
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^7
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+	};
+/*
+	std::array<std::array<complex, 128>, 8> arr = {
+	// 2^0
+		std::array<complex, 128> a = {-1},
+	// 2^1
+		std::array<complex, 128> b = {-1,-1},
+	// 2^2
+		std::array<complex, 128> c = {-1,-1,-1,-1},
+	// 2^3
+		std::array<complex, 128> d = {-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^4
+		std::array<complex, 128> e = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^5
+		std::array<complex, 128> f = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^6
+		std::array<complex, 128> g = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
+	// 2^7
+		std::array<complex, 128> h = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+	};
+*/
+};

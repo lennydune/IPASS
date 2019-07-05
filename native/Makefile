@@ -9,15 +9,15 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := fft.cpp 
+SOURCES := fft.cpp complex.cpp
 
 # header files in this project
-HEADERS := fft.hpp 
+HEADERS := fft.hpp complex.hpp
 
 # other places to look for files for this project
 SEARCH  := 
 
 # set RELATIVE to the next higher directory 
 # and defer to the appropriate Makefile.* there
-RELATIVE := .
+RELATIVE := ..
 include $(RELATIVE)/Makefile.native
