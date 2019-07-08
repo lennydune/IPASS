@@ -1,5 +1,5 @@
 #include "hwlib.hpp"
-#include "fft_new.hpp"
+#include "fft.hpp"
 
 namespace ht = hwlib::target;
 
@@ -34,7 +34,7 @@ int main(void) {
 	while(1) {
 		// prepare an array with data - 128 samples
 		// make sure to set fft_new::SAMPLE_SIZE to the same value
-		/*
+		
 		CArray data {(double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
@@ -43,17 +43,17 @@ int main(void) {
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read()};
-		*/
-		Complex analogData[] = {input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-					 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read()};
+		
+		// Complex analogData[] = {input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
+		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read()};
 
-		CArray data(analogData);
+		// CArray data(analogData);
 
 		// perform the transformation on the data
 		fft(data);
