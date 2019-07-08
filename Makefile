@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := fft2.cpp
+SOURCES := fft.cpp
 
 # header files in this project
-HEADERS := fft2.hpp
+HEADERS := fft.hpp
 
 # other places to look for files for this project
 SEARCH  := 

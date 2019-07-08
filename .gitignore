@@ -3,3 +3,5 @@
 *.c
 *.ld
 *.map
+*.bin
+*.elf

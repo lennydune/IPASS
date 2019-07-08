@@ -1,5 +1,5 @@
 #include <hwlib.hpp>
-#include <unistd.h>
+#include <iostream>
 #include "fft.hpp"
 
 namespace ht = hwlib::target;
@@ -14,31 +14,71 @@ float remap(float value, float low1, float high1, float low2, float high2) {
 }
 
 int main(void) {
-	ht::window w(hwlib::xy(128, 64));
-	srand(time(0));
-	
-	for(;;) {
-		Complex data[] = {(double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
-					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096)};
+// FFT Test
+	std::cout << std::endl
+			  << "======FFT======\n";
+	CArray data {1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0};
 
-		CArray fftData(data, SAMPLE_SIZE);
-		fft(fftData);
-
-		w.clear();
-
-		for (unsigned int x = 0; x < w.size.x; x++) {
-			for (int y = 0; y < remap(data[x].real(), -2000, 5000, 0, w.size.y); y++) {
-				w.write(hwlib::xy(x,w.size.y - y));
-			}
-		}
-		usleep(100*1000);
-		w.flush();
+	std::cout << "Input:\n"
+			  << "> ";
+	for (Complex i : data) {
+		std::cout << i;
 	}
-	return 0;
+
+	fft(data);
+
+	std::cout << "\n"
+			  << "Expected output:\n"
+			  << "> (4,0)(1,-2.41421)(0,0)(1,-0.414214)(0,0)(1,0.414214)(0,0)(1,2.41421)\n"
+
+			  << "Actual output:\n"
+			  << "> ";
+	
+	for (Complex i : data) {
+		std::cout << i;
+	}
+	std::cout << std::endl << std::endl;
+
+// Remap Test
+	std::cout << "=====Remap=====\n";
+	int a = 5;
+	double b = 5.0;
+
+	std::cout << "Input:\n"
+			  << "> int    a = " << a << "\n"
+			  << "> double b = " << b << "\n"
+			  << "> remap(a, 0, 10, -5, 5)\n"
+			  << "> remap(b, 0, 100, 0, 1)\n"
+
+			  << "Expected output:\n"
+			  << "> a: 0\n"
+			  << "> b: 0.05\n"
+
+			  << "Actual output:\n"
+			  << "> a: " << remap(a, 0, 10, -5, 5) << "\n"
+			  << "> b: " << remap(b, 0, 100, 0, 1) << "\n";
+
+// Reorder Test
+	std::cout << "====Reorder====\n";
+	CArray c {0,1,2,3,4,5,6,7};
+
+	std::cout << "Input:\n"
+			  << "> ";
+	for (Complex i : c) {
+		std::cout << i;
+	}
+
+	std::cout << "\n"
+			  << "> reorder(c, 0, 3, 2)\n"
+
+			  << "Expected output:\n"
+			  << "> c: (0,0)(1,0)(2,0)(3,0)(4,0)(5,0)(6,0)(7,0)\n"
+
+			  << "Actual output:\n"
+			  << "> c: ";
+	reorder(c, 0, 5, 2);
+	for (Complex i : c) {
+		std::cout << i;
+	}
+	std::cout << std::endl;
 }
