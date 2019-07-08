@@ -24,7 +24,7 @@ public:
 
 	/// \brief complex operator+=
 	///		   Add a complex number into another complex number
-	complex& operator+=(const complex &rhs) {
+	complex& operator+=(const complex &rhs){
 		real += rhs.real;
 		imag += rhs.imag;
 		return *this;
@@ -32,7 +32,7 @@ public:
 
 	/// \brief complex operator-=
 	///		   Subtract a complex number into another complex number
-	complex& operator-=(const complex &rhs) {
+	complex& operator-=(const complex &rhs){
 		real -= rhs.real;
 		imag -= rhs.imag;
 		return *this;
@@ -40,44 +40,27 @@ public:
 
 	/// \brief complex operator*=
 	///		   Multiply a complex number into another complex number
-	complex& operator*=(const complex &rhs) {
+	complex& operator*=(const complex &rhs){
 		real *= rhs.real;
 		imag *= rhs.imag;
 		return *this;
 	}
-
-	/// \brief complex operator+
-	///		   Add a complex number with another complex number
-	complex operator+(const complex &rhs) {
-		complex x = *this;
-		x += rhs;
-		return x;
-	}
-
-	/// \brief complex operator-
-	///		   Subtract a complex number with another complex number
-	complex operator-(const complex &rhs) {
-		complex x = *this;
-		x -= rhs;
-		return x;
-	}
-
-	/// \brief complex operator*
-	///		   Multiply a complex number with another complex number
-	complex operator*(const complex &rhs) {
-		complex x = *this;
-		x *= rhs;
-		return x;
-	}
 };
-
-/*
-functies toevoegen aan de class
-polar beschrijving verbeteren
-*/
 
 /// \brief complex polar
 ///		   Return the polar coordinates for a complex number in euclidean space
 /** By multiplying the sine and cosine of theta with rho we get the coordinates.
 	These can be used with [remap](@ref remap)*/
 complex polar(const double &rho, const double &theta);
+
+/// \brief complex operator+
+///		   Add a complex number with another complex number
+complex operator+(const complex &lhs, const complex &r);
+
+/// \brief complex operator-
+///		   Subtract a complex number with another complex number
+complex operator-(const complex &lhs, const complex &r);
+
+/// \brief complex operator*
+///		   Multiply a complex number with another complex number
+complex operator*(const complex &lhs, const complex &r);

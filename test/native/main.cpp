@@ -18,7 +18,7 @@ int main(void) {
 	srand(time(0));
 	
 	for(;;) {
-		CArray data {(double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
+		Complex data[] = {(double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
 					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
 					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
 					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
@@ -27,12 +27,13 @@ int main(void) {
 					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096),
 					 (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096), (double)(rand()%4096)};
 
-		fft(data);
+		CArray fftData(data, SAMPLE_SIZE);
+		fft(fftData);
 
 		w.clear();
 
 		for (unsigned int x = 0; x < w.size.x; x++) {
-			for (int y = 0; y < remap(data[x].real, -30000, 30000, 0, w.size.y); y++) {
+			for (int y = 0; y < remap(data[x].real(), -2000, 5000, 0, w.size.y); y++) {
 				w.write(hwlib::xy(x,w.size.y - y));
 			}
 		}

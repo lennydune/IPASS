@@ -1,5 +1,5 @@
 #include "hwlib.hpp"
-#include "fft.hpp"
+#include "fft_new.hpp"
 
 namespace ht = hwlib::target;
 
@@ -34,7 +34,6 @@ int main(void) {
 	while(1) {
 		// prepare an array with data - 128 samples
 		// make sure to set fft_new::SAMPLE_SIZE to the same value
-		
 		CArray data {(double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
@@ -43,17 +42,6 @@ int main(void) {
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(),
 					 (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read(), (double)input.read()};
-		
-		// Complex analogData[] = {input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(),
-		// 			 input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read(), input.read()};
-
-		// CArray data(analogData);
 
 		// perform the transformation on the data
 		fft(data);
@@ -64,11 +52,11 @@ int main(void) {
 		// iterate over every pixel that has to be written to (turned white/on)
 		for (int x = 0; x < display.size.x; x++) {
 			// also remap the data to usable values
-			for (int y = 0; y < (int)remap(data[x].real(), 0, 4096, 0, display.size.y); y++) {
+			for (int y = 0; y < (int)remap(data[x].real, 0, 4096, 0, display.size.y); y++) {
 				display.write(hwlib::xy(x,display.size.y - y));
 			}
 		}
-		hwlib::wait_ms(100);
+		hwlib::wait_ms(10);
 
 		// flush the display and do it all again
 		display.flush();
