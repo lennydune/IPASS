@@ -1,5 +1,4 @@
 #include <cmath>
-#include <array>
 
 /// \brief class complex
 ///		   The class to implement complex numbers

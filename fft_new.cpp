@@ -19,7 +19,7 @@ CArray slice(CArray &arr, const unsigned int &start, const unsigned int &end, co
 /** By applying a Fourier Transformation we can split the audio spectrum into frequency bands.
 	Those bands can then be displayed on a screen as bars (example).*/
 void fft(CArray &arr) {
-	const size_t N = arr.size();
+	size_t N = index(powers, SAMPLE_SIZE);
 	if (N <= 1) return;
 
 	// std::slice replaced with own function -- functionality roughly equal
