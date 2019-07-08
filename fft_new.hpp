@@ -1,5 +1,5 @@
 #include "complex.hpp"
-#include <vector>
+#include <vector>	// vector kan niet
 
 /// PI - 3.14... the well known irrational number
 const double PI = 3.141592653589793238463;

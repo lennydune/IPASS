@@ -38,3 +38,8 @@ void fft(CArray &arr) {
 		arr[i+N/2] = even[i] - t;
 	}
 }
+
+
+/*
+array of arrays with powers of 2
+*/

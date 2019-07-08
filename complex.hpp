@@ -47,6 +47,11 @@ public:
 	}
 };
 
+/*
+functies toevoegen aan de class
+polar beschrijving verbeteren
+*/
+
 /// \brief complex polar
 ///		   Return the polar coordinates for a complex number in euclidean space
 /** By multiplying the sine and cosine of theta with rho we get the coordinates.
