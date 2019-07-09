@@ -19,7 +19,7 @@ void fft(CArray &arr, size_t N) {
 	fft(a1, N/4);
 	fft(a2, N/4);
 
-	for (unsigned int i = 0; i < N/2; i++) {
+	for (unsigned int i = 0; i < N/4; i++) {
 		Complex t = std::polar(1.0, -2 * PI * i / N) * a2[i];
 		arr[i] = a1[i] + t;
 		arr[i+N/2] = a1[i] - t;
