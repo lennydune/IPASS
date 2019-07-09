@@ -46,6 +46,7 @@ int main(void) {
 		// insert values
 		for (Complex &i : data) {
 			i = input.read();
+			hwlib::cout << i << "\n";
 		}
 
 		// perform the transformation on the data

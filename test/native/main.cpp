@@ -37,7 +37,8 @@ int main(void) {
 	for (Complex i : data) {
 		std::cout << i;
 	}
-	std::cout << std::endl << std::endl;
+
+	std::cout << "\n\n";
 
 // Remap Test
 	std::cout << "=====Remap=====\n";
@@ -47,32 +48,34 @@ int main(void) {
 	std::cout << "Input:\n"
 			  << "> int    a = " << a << "\n"
 			  << "> double b = " << b << "\n"
-			  << "> remap(a, 0, 10, -5, 5)\n"
-			  << "> remap(b, 0, 100, 0, 1)\n"
+			  << "> remap(a, 0, 100, 0, 1)\n"
+			  << "> remap(b, 0, 10, -5, 5)\n"
 
 			  << "Expected output:\n"
-			  << "> a: 0\n"
-			  << "> b: 0.05\n"
+			  << "> a: 0.05\n"
+			  << "> b: 0\n"
 
 			  << "Actual output:\n"
-			  << "> a: " << remap(a, 0, 10, -5, 5) << "\n"
-			  << "> b: " << remap(b, 0, 100, 0, 1) << "\n";
+			  << "> a: " << remap(a, 0, 100,  0, 1) << "\n"
+			  << "> b: " << remap(b, 0, 10,  -5, 5) << "\n";
+
+	std::cout << "\n";
 
 // Reorder Test
 	std::cout << "====Reorder====\n";
 	CArray c {0,1,2,3,4,5,6,7};
 
 	std::cout << "Input:\n"
-			  << "> ";
+			  << "> c: ";
 	for (Complex i : c) {
 		std::cout << i;
 	}
 
 	std::cout << "\n"
-			  << "> reorder(c, 0, 3, 2)\n"
+			  << "> reorder(c, 0, 5, 2)\n"
 
 			  << "Expected output:\n"
-			  << "> c: (0,0)(1,0)(2,0)(3,0)(4,0)(5,0)(6,0)(7,0)\n"
+			  << "> c: (0,0)(2,0)(4,0)(3,0)(1,0)(5,0)(6,0)(7,0)\n"
 
 			  << "Actual output:\n"
 			  << "> c: ";
@@ -80,5 +83,5 @@ int main(void) {
 	for (Complex i : c) {
 		std::cout << i;
 	}
-	std::cout << std::endl;
+	std::cout << "\n\n";
 }
