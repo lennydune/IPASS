@@ -72,14 +72,14 @@ int main(void) {
 	}
 
 	std::cout << "\n"
-			  << "> reorder(c, 0, 4, 2)\n"
+			  << "> reorder(c, 0, 5, 2)\n"
 
 			  << "Expected output:\n"
 			  << "> c: (0,0)(2,0)(4,0)(6,0)(1,0)(5,0)(3,0)(7,0)\n"
 
 			  << "Actual output:\n"
 			  << "> c: ";
-	reorder(c, 0, 4, 2);
+	reorder(c, 0, 5, 2);
 	for (Complex i : c) {
 		std::cout << i;
 	}

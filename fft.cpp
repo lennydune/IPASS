@@ -1,9 +1,9 @@
-#include "fft.hpp"
+ #include "fft.hpp"
 #include "hwlib.hpp"
 
 void reorder(CArray &arr, const unsigned int &start, const unsigned int &size, const unsigned int &step) {
-	for (unsigned int i = start; i < size+start-1; i++) {
-		std::swap(arr[i], arr[i*step]);
+	for (unsigned int i = start; i < size+start; i++) {
+		std::swap(arr[i-start], arr[i*step-start]);
 	}
 }
 
