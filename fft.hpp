@@ -1,15 +1,21 @@
 #include <complex>
 #include <array>
 
-/// PI - 3.14... the well known irrational number
+/// PI - 3.14 the well known irrational number
 const double PI = 3.141592653589793238463;
 
+/// An array of powers of 2 for quick reference
 					/*0, 1, 2, 3,  4,  5,  6,   7,   8,   9,   10*/
 const int powers[] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
+
+/// The amount of samples to take for fft
 const size_t SAMPLE_SIZE = powers[7];
 
-
+/// Any complex number, mathematically known as i.
+/** Consists of a real and an imaginary number*/
 typedef std::complex<double> Complex;
+
+/// An array of [complex](@ref Complex) numbers at the [SAMPLE_SIZE](@ref SAMPLE_SIZE)
 typedef std::array<Complex, SAMPLE_SIZE> CArray;
 
 /// \brief void fft(CArray, size_t)

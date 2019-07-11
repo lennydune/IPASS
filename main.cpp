@@ -5,8 +5,9 @@ namespace ht = hwlib::target;
 
 /// \brief float Remap()
 /// 	   remaps given value V on scale A to scale B
-/** With the mathematical function below this function changes a floating-point value from one scale to another
-	`newValue = scale_B_low + (scale_B_high - scale_B_low) * ((Value - scale_A_low) / (scale_A_high - scale_A_low))`
+/** With the mathematical function below this function changes a floating-point value from one scale to another.
+
+	    newValue = scale_B_low + (scale_B_high - scale_B_low) * ((Value - scale_A_low) / (scale_A_high - scale_A_low)).
 	In case `scale_A_high - scale_A_low` equals to 0 then the original value will be returned to negate 0-division errors.*/
 
 float remap(float value, float low1, float high1, float low2, float high2) {
