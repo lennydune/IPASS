@@ -45,6 +45,7 @@ int main(void) {
 
 		// insert values
 		for (Complex &i : data) {
+			// input.read() has a built-in latency, this is why I don't get duplicate data
 			i = input.read();
 		}
 
@@ -57,7 +58,7 @@ int main(void) {
 		// iterate over every pixel that has to be written to (turned white/on)
 		for (int x = 0; x < display.size.x; x++) {
 			// also remap the data to usable values
-			for (int y = 0; y < (int)remap(data[x].real(), 0, 250, 0, display.size.y); y++) {
+			for (int y = 0; y < (int)remap(data[x].real(), -5000, 5000, 0, display.size.y); y++) {
 				display.write(hwlib::xy(x,display.size.y - y));
 			}
 		}
