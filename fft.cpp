@@ -7,6 +7,11 @@ void reorder(CArray &arr, const unsigned int &start, const unsigned int &size, c
 	}
 }
 
+void fft(CArray &arr) {
+	size_t N = arr.size();	
+	fft(arr, N);
+}
+
 void fft(CArray &arr, size_t N) {
 	if (N <= 1) return;
 
@@ -26,7 +31,3 @@ void fft(CArray &arr, size_t N) {
 	}
 }
 
-void fft(CArray &arr) {
-	size_t N = arr.size();	
-	fft(arr, N);
-}

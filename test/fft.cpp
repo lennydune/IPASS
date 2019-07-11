@@ -1,6 +1,8 @@
 #include "fft.hpp"
 #include <iostream>
 
+
+
 void reorder(CArray &arr, const unsigned int &start, const unsigned int &size, const unsigned int &step) {
 	for (unsigned int i = start; i < size + start - 1; i++) {
 		std::swap(arr[i], arr[arr.size()-i]);
