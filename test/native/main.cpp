@@ -2,6 +2,11 @@
 #include <iostream>
 #include "fft.hpp"
 
+/*
+Potentiele testcase:
+	Stemapparaat, twee leds, een voor te hoog de ander te laag, op basis van de piek die fft detecteert
+*/
+
 namespace ht = hwlib::target;
 
 float remap(float value, float low1, float high1, float low2, float high2) {
