@@ -29,7 +29,7 @@ int main(void) {
 	auto display = hwlib::glcd_oled(i2c, 0x3c);
 
 	// setup the audio input
-	auto input = ht::pin_adc(ht::ad_pins::a0); // a8 voor final; a0 voor testen
+	auto input = ht::pin_adc(ht::ad_pins::a0);
 
 	// loop forever
 	while(1) {
@@ -56,10 +56,12 @@ int main(void) {
 		// clear display before displaying stuff
 		display.clear();
 
+		const double boundary = 10000;
+
 		// iterate over every pixel that has to be written to (turned white/on)
 		for (int x = 0; x < display.size.x; x++) {
 			// also remap the data to usable values
-			for (int y = 0; y < (int)remap(data[x/2+1].real(), -10000, 10000, 0, display.size.y); y++) {
+			for (int y = 0; y < (int)remap(data[x/2+1].real(), -1*boundary, boundary, 0, display.size.y); y++) {
 				display.write(hwlib::xy(x, display.size.y - y));
 			}
 		}
